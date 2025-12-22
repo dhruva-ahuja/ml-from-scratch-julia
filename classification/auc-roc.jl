@@ -1,14 +1,7 @@
+using Base: @main
 import Random: seed!
 import LinearAlgebra: I
 using Distributions: MvNormal
-
-seed!(42)
-
-truth_labels = [rand() > 0.6 ? true : false for _ in 1:100]
-
-predicted_probs = rand(MvNormal(truth_labels, 0.3 * I(length(truth_labels))))
-predicted_probs = min.(max.(0, predicted_probs), 1)
-
 
 function roc_curve(truth_labels, predicted_probs)
     tprs = []
@@ -36,5 +29,12 @@ function compute_aocroc(tprs, fprs)
     return aucroc
 end
 
-tprs, fprs = roc_curve(truth_labels, predicted_probs)
-compute_aocroc(tprs, fprs)
+@main function main(_)
+    seed!(42)
+    truth_labels = [rand() > 0.6 ? true : false for _ in 1:100]
+    predicted_probs = rand(MvNormal(truth_labels, 0.3 * I(length(truth_labels))))
+    predicted_probs = min.(max.(0, predicted_probs), 1)
+
+    tprs, fprs = roc_curve(truth_labels, predicted_probs)
+    compute_aocroc(tprs, fprs)
+end

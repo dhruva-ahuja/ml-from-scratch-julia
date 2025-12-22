@@ -44,7 +44,7 @@ function naive_bayes_classifier(X_test, priors, likelihoods)
 end
 
 
-@main function main(args)
+@main function main(_)
     df = DataFrame(
         :Temperature => ["Hot", "Cold", "Cold", "Hot", "Cold"],
         :Outlook => ["Sunny", "Rainy", "Rainy", "Sunny", "Sunny"],
@@ -52,5 +52,5 @@ end
     )
 
     new_day = DataFrame(:Temperature => "Hot", :Outlook => "Sunny")
-    naive_bayes_classifier(new_day, prior_probability(df.Play), calculate_likelihoods(df[:, [:Temperature, :Outlook]], df.Play))
+    println(naive_bayes_classifier(new_day, prior_probability(df.Play), calculate_likelihoods(df[:, [:Temperature, :Outlook]], df.Play)))
 end
