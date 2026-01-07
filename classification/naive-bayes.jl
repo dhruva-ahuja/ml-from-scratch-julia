@@ -1,4 +1,3 @@
-using Base: @main
 using DataFrames
 import StatsBase: countmap
 

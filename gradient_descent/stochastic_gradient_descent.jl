@@ -13,8 +13,8 @@ function sgd_linear_regression(X, Y)
 
         pred = x_i * m + b
 
-        grad_m = 2 * (pred - y_i) * x_i
-        grad_b = 2 * (pred - y_i)
+        grad_m = - 2 * (y_i - pred) * x_i
+        grad_b = - 2 * (y_i - pred)
 
         m -= learning_rate * grad_m
         b -= learning_rate * grad_b
@@ -22,6 +22,7 @@ function sgd_linear_regression(X, Y)
 
     m, b
 end
+
 
 @main function main(_)
     X = [0.7, 1.5, 2.1, 2.9, 3.3, 4.5]
